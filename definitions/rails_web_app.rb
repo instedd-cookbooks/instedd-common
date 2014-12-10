@@ -18,8 +18,9 @@ define :rails_web_app, config_files: [] do
   end
 
   web_app params[:name] do
-    cookbook "apache2"
+    cookbook "instedd-common"
     server_name _params[:server_name]
     docroot "/u/apps/#{_params[:name]}/current/public"
+    passenger_spawn_method _params[:passenger_spawn_method]
   end
 end

@@ -18,8 +18,12 @@
   <% if @params[:ssl_cert_chain_file] -%>
   SSLCertificateChainFile <%= @params[:ssl_cert_chain_file] %>
   <% end -%>
+  <% if @params[:ssl_env_vars] -%>
+  <% @params[:ssl_env_vars].each do |name, value| -%>
+  SetEnv <%= name %> "<%= value %>"
   <% end -%>
-
+  <% end -%>
+  <% end -%>
 
   <Directory <%= @params[:docroot] %>>
     Options <%= [@params[:directory_options] || "FollowSymLinks" ].flatten.join " " %>

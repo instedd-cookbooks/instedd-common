@@ -34,6 +34,7 @@ define :rails_web_app, config_files: [], ssl: false do
       docroot "/u/apps/#{_params[:name]}/current/public"
       passenger_spawn_method _params[:passenger_spawn_method]
       ssl true
+      ssl_env_vars _params[:ssl_env_vars]
       ssl_cert_file _params[:ssl_cert_file]
       ssl_cert_key_file _params[:ssl_cert_key_file]
       ssl_cert_chain_file _params[:ssl_cert_chain_file]

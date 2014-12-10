@@ -7,6 +7,19 @@
   <% if @params[:passenger_spawn_method] -%>
   PassengerSpawnMethod <%= @params[:passenger_spawn_method] %>
   <% end -%>
+  <% if @params[:ssl] -%>
+  SSLEngine on
+  <% if @params[:ssl_cert_file] -%>
+  SSLCertificateFile <%= @params[:ssl_cert_file] %>
+  <% end -%>
+  <% if @params[:ssl_cert_key_file] -%>
+  SSLCertificateKeyFile <%= @params[:ssl_cert_key_file] %>
+  <% end -%>
+  <% if @params[:ssl_cert_chain_file] -%>
+  SSLCertificateChainFile <%= @params[:ssl_cert_chain_file] %>
+  <% end -%>
+  <% end -%>
+
 
   <Directory <%= @params[:docroot] %>>
     Options <%= [@params[:directory_options] || "FollowSymLinks" ].flatten.join " " %>

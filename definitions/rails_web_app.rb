@@ -1,4 +1,4 @@
-define :rails_web_app, config_files: [] do
+define :rails_web_app, config_files: [], ssl: false do
   _params = params
   app_dir = params[:app_dir] || "/u/apps/#{params[:name]}"
   app_owner = params[:owner] || node['current_user']
@@ -22,5 +22,21 @@ define :rails_web_app, config_files: [] do
     server_name _params[:server_name]
     docroot "/u/apps/#{_params[:name]}/current/public"
     passenger_spawn_method _params[:passenger_spawn_method]
+  end
+
+  if params[:ssl]
+    include_recipe "apache2::mod_ssl"
+
+    web_app "#{params[:name]}-ssl" do
+      cookbook "instedd-common"
+      server_name _params[:server_name]
+      server_port 443
+      docroot "/u/apps/#{_params[:name]}/current/public"
+      passenger_spawn_method _params[:passenger_spawn_method]
+      ssl true
+      ssl_cert_file _params[:ssl_cert_file]
+      ssl_cert_key_file _params[:ssl_cert_key_file]
+      ssl_cert_chain_file _params[:ssl_cert_chain_file]
+    end
   end
 end

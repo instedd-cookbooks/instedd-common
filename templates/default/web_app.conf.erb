@@ -24,6 +24,11 @@
   <% end -%>
   <% end -%>
   <% end -%>
+  <% if @params[:partials] -%>
+  <% @params[:partials].each do |partial, options| %>
+  <%= render partial, options %>
+  <% end -%>
+  <% end -%>
 
   <Directory <%= @params[:docroot] %>>
     Options <%= [@params[:directory_options] || "FollowSymLinks" ].flatten.join " " %>

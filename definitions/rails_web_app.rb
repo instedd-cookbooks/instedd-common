@@ -22,6 +22,7 @@ define :rails_web_app, config_files: [], ssl: false do
     server_name _params[:server_name]
     docroot "/u/apps/#{_params[:name]}/current/public"
     passenger_spawn_method _params[:passenger_spawn_method]
+    partials _params[:partials]
   end
 
   if params[:ssl]
@@ -33,6 +34,7 @@ define :rails_web_app, config_files: [], ssl: false do
       server_port 443
       docroot "/u/apps/#{_params[:name]}/current/public"
       passenger_spawn_method _params[:passenger_spawn_method]
+      partials _params[:ssl_partials]
       ssl true
       ssl_env_vars _params[:ssl_env_vars]
       ssl_cert_file _params[:ssl_cert_file]

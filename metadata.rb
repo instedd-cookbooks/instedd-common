@@ -8,4 +8,4 @@ version          '0.1.0'
 
 depends 'apt'
 depends 'rbenv'
-depends 'passenger_apache2'
+depends 'passenger_apache2', '<= 2.2.2'

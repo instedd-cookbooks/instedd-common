@@ -6,8 +6,8 @@ define :rails_web_app, config_files: [], ssl: false do
   %w(/ /releases /shared /shared/system /shared/log /shared/pids).each do |dir|
     directory "#{app_dir}#{dir}" do
       recursive true
-      owner _params[:owner]
-      group _params[:owner]
+      owner app_owner
+      group app_owner
     end
   end
 

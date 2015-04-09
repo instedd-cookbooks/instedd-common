@@ -19,7 +19,9 @@ define :rails_web_app, config_files: [], ssl: false do
 
   web_app params[:name] do
     cookbook "instedd-common"
+    template 'web_app_redirect.conf.erb' if _params[:force_ssl]
     server_name _params[:server_name]
+    server_port _params[:server_port] || node['apache']['listen_ports'].first
     docroot "/u/apps/#{_params[:name]}/current/public"
     passenger_spawn_method _params[:passenger_spawn_method]
     partials _params[:partials]
@@ -31,7 +33,7 @@ define :rails_web_app, config_files: [], ssl: false do
     web_app "#{params[:name]}-ssl" do
       cookbook "instedd-common"
       server_name _params[:server_name]
-      server_port 443
+      server_port _params[:ssl_port] || 443
       docroot "/u/apps/#{_params[:name]}/current/public"
       passenger_spawn_method _params[:passenger_spawn_method]
       partials _params[:ssl_partials]

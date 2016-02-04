@@ -1,4 +1,6 @@
 include_recipe 'apache2'
+include_recipe 'apache2::mod_filter'
+include_recipe 'apache2::mod_deflate'
 include_recipe 'rbenv'
 
 apt_repository 'passenger' do
@@ -21,6 +23,10 @@ template "#{node['apache']['dir']}/mods-available/passenger.conf" do
   variables \
     passenger_root: lazy { `/usr/bin/passenger-config --root`.chomp },
     passenger_ruby: "#{node['rbenv']['root_path']}/shims/ruby"
+end
+
+apache_conf 'deflate_extra' do
+  enable true
 end
 
 apache_module 'passenger'

@@ -7,6 +7,9 @@
   <% if @params[:passenger_spawn_method] -%>
   PassengerSpawnMethod <%= @params[:passenger_spawn_method] %>
   <% end -%>
+  <% if @params[:passenger_max_requests] -%>
+  PassengerMaxRequests <%= @params[:passenger_max_requests] %>
+  <% end -%>
   <% if @params[:ssl] -%>
   SSLEngine on
   <% if @params[:ssl_cert_file] -%>

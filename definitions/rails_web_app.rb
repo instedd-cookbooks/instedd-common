@@ -24,6 +24,7 @@ define :rails_web_app, config_files: [], ssl: false do
     server_port _params[:server_port] || node['apache']['listen_ports'].first
     docroot "/u/apps/#{_params[:name]}/current/public"
     passenger_spawn_method _params[:passenger_spawn_method]
+    passenger_max_requests _params[:passenger_max_requests]
     partials _params[:partials]
   end
 
@@ -36,6 +37,7 @@ define :rails_web_app, config_files: [], ssl: false do
       server_port _params[:ssl_port] || 443
       docroot "/u/apps/#{_params[:name]}/current/public"
       passenger_spawn_method _params[:passenger_spawn_method]
+      passenger_max_requests _params[:passenger_max_requests]
       partials _params[:ssl_partials]
       ssl true
       ssl_env_vars _params[:ssl_env_vars]
